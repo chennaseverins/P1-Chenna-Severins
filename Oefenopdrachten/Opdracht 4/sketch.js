@@ -49,3 +49,4 @@ function drawStoplight(x, y) {
   circle(x + 50, y + 125, 55);
   circle(x + 50, y + 200, 55);
 }
+if 

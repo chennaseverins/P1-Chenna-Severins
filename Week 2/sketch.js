@@ -10,30 +10,8 @@ let clouds = [
 let sun = { x: 600, y: 70, speed: 1.5 };
 let stoplight = 'red'
 let enterCooldown = 0;
-if (stoplight == 'red'){
-   fill('red')
-circle( + 35,  + 35, 35);
-}else if (stoplight == 'green'){
-  fill('green')
-  circle( + 35,  + 145, 35);
-}else if (stoplight == 'orange'){
-fill('orange')
-circle( + 35,  + 145, 35);
-}
-if (enterCooldown > 0){
-  enterCooldown -= 1;
-}
-if (keyIsDown(13) && enterCooldown === 0){
-    if (stoplight === 'red'){
-      stoplight = 'green'
-    } else if (stoplight === 'green'){
-      stoplight = 'orange'
-    } else if (stoplight === 'orange'){
-      stoplight = 'red'
-    }
-    enterCooldown = 10;
-  }
-}
+
+
 function setup() {
   createCanvas(1400, 800);
 }
@@ -67,7 +45,30 @@ function draw() {
 
 function moveCar() {
   for (let car of cars) {
-    car.x += 2;
+    let carAhead = false;
+    let speed = 4;
+
+    for (let otherCar of cars) {
+      if (otherCar !== car) {
+        let distance = (otherCar.x - car.x + width) % width;
+
+        if (distance > 0 && distance < 120) {
+          carAhead = true;
+        }
+      }
+    }
+
+    if (stoplight === 'orange') {
+      speed = 1;
+    }
+
+    if (!carAhead && (
+      stoplight !== 'red' ||
+      car.x + 100 < 1100 ||
+      car.x >= 1100
+    )) {
+      car.x += speed;
+    }
 
     if (car.x > width) {
       car.x = -100;
@@ -143,17 +144,38 @@ function drawCar(x, y) {
 function drawStoplight(x, y) {
   fill('#222222');
   rect(x, y, 70, 180, 100);
-
-  fill('red');
+  fill(120)
   circle(x + 35, y + 35, 35);
-
-  fill('yellow');
   circle(x + 35, y + 90, 35);
-
-  fill('green');
   circle(x + 35, y + 145, 35);
 
   fill('#444444');
   rect(x + 30, y + 180, 10, 150);
   rect(x - 20, y + 325, 110, 15);
+
+  if (stoplight == 'red'){
+    fill('red')
+    circle(x + 35, y + 35, 35);
+  }else if (stoplight == 'green'){
+    fill('green')
+    circle(x + 35, y + 145, 35);
+  }else if (stoplight == 'orange'){
+    fill('orange')
+    circle(x + 35, y + 90, 35);
+  }
+
+  if (enterCooldown > 0){
+    enterCooldown -= 1;
+  }
+
+  if (keyIsDown(13) && enterCooldown === 0){
+    if (stoplight === 'red'){
+      stoplight = 'green'
+    } else if (stoplight === 'green'){
+      stoplight = 'orange'
+    } else if (stoplight === 'orange'){
+      stoplight = 'red'
+    }
+    enterCooldown = 10;
+  }
 }
