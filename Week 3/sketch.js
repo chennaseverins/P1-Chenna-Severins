@@ -24,16 +24,19 @@ function draw() {
     }
   }
 
-  fill('black');
+  fill('purple');
   textAlign(CENTER, CENTER);
   textSize(100);
   for (let row = 0; row < 3; row++) {
+
+    
+
     for (let column = 0; column < 3; column++) {
       text(board[row][column], 220 + column * 200, 240 + row * 180);
     }
   }
 
-  textSize(24);
+  textSize(27);
   text(gameMessage || `Player ${currentPlayer}'s turn`, 400, 50);
 }
 
