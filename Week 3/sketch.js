@@ -12,7 +12,7 @@ function setup() {
 }
 
 function draw() {
-  background(220, 220);
+  background('yellow');
 
   fill('black');
   square(120, 100, 600, 50);
@@ -28,9 +28,7 @@ function draw() {
   textAlign(CENTER, CENTER);
   textSize(100);
   for (let row = 0; row < 3; row++) {
-
-    
-
+  
     for (let column = 0; column < 3; column++) {
       text(board[row][column], 220 + column * 200, 240 + row * 180);
     }
@@ -56,7 +54,7 @@ function mousePressed() {
     board[row][column] = currentPlayer;
 
     if (hasWinner(currentPlayer)) {
-      gameMessage = `Player ${currentPlayer} wins!`;
+      gameMessage = `Player ${currentPlayer} wins!:D`;
       gameOver = true;
       setTimeout(resetGame, 1000);
       return;
