@@ -19,7 +19,7 @@ let x = random(width);
 let y = random(height);
 
 console.log(shapes[0]);
-shapes.push("ellipse");  //voegt een nieuwe waarde toe aan de array shapes
+shapes.push("ellipse");  //voegt een nieuwe waarde toe aan de array shapes ja
 
 if (shape == "ellipse") {
   ellipse(x, y, 50, 50);
