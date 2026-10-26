@@ -1,23 +1,50 @@
-function setup() {
-  createCanvas(1900, 1900);
-}
+let sleep = 50;
+let hunger = 50;
+let happiness = 50;
+let cleanliness = 50;
 
-let petImage;
+let petImage; // laat een variabele zien voor het huisdier
+let backgroundImage; // laat een variabele zien voor de achtergrond
+
+function setup() {
+  createCanvas(900, 900);
+
+  const actions = [
+    ["Feed", () => hunger = min(100, hunger + 20)],
+    ["Sleep", () => sleep = min(100, sleep + 20)],
+    ["Play", () => happiness = min(100, happiness + 20)],
+    ["Clean", () => cleanliness = min(100, cleanliness + 20)]
+  ];
+
+  actions.forEach(([label, action], index) => { // maak knoppen voor elke actie
+    const button = createButton(label);
+    button.position(20, 250 + index * 70);
+    button.size(200, 55);
+    button.style('font-size', '24px');
+    button.style('cursor', 'pointer');
+    button.mousePressed(action);
+  });
+}
 
 function preload() {
-  petImage = loadImage("assets/normal gizmo.png");
-
+  petImage = loadImage("assets/normal gizmo.png"); // laad het huisdier in
+  backgroundImage = loadImage("assets/circusje.jpg"); // laad de achtergrond in
 }
-
 function draw() {
-  background(220);
-  image(petImage, 200, 200, 300, 300);
+  background(backgroundImage);
+  
+  image(petImage, 300, 520, 300, 400); // laat het huisdier zien
 
-  let sleep = 0;
+  textSize(32);
+  text("Sleep: " + sleep, 20, 50); // laat de slaapstatus zien
 
-  let hunger = 0;
+  textSize(32);
+  text("Hunger: " + hunger, 20, 100); // laat de hongerstatus zien
 
-  let happiness = 100;
+  textSize(32);
+  text("Happiness: " + happiness, 20, 150); // laat de gelukstatus zien
 
+  textSize(32);
+  text("Cleanliness: " + cleanliness, 20, 200); // laat de schoonheidsstatus zien
 }
  
